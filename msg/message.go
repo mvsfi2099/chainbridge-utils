@@ -36,7 +36,7 @@ type Message struct {
 	Payload      []interface{} // data associated with event sequence
 }
 
-func NewFungibleTransfer(source, dest ChainId, nonce Nonce, amount *big.Int, resourceId ResourceId, recipient []byte) Message {
+func NewFungibleTransfer(source, dest ChainId, nonce Nonce, amount *big.Int, resourceId ResourceId, recipient []byte,value *big.Int) Message {
 	return Message{
 		Source:       source,
 		Destination:  dest,
@@ -46,6 +46,7 @@ func NewFungibleTransfer(source, dest ChainId, nonce Nonce, amount *big.Int, res
 		Payload: []interface{}{
 			amount.Bytes(),
 			recipient,
+			value.Bytes(),
 		},
 	}
 }

@@ -50,6 +50,21 @@ func NewFungibleTransfer(source, dest ChainId, nonce Nonce, amount *big.Int, res
 	}
 }
 
+func NewTokenAndValueTransfer(source, dest ChainId, nonce Nonce, amount *big.Int, resourceId ResourceId, recipient []byte,value *big.Int) Message {
+	return Message{
+		Source:       source,
+		Destination:  dest,
+		Type:         FungibleTransfer,
+		DepositNonce: nonce,
+		ResourceId:   resourceId,
+		Payload: []interface{}{
+			amount.Bytes(),
+			recipient,
+			value.Bytes(),
+		},
+	}
+}
+
 func NewNonFungibleTransfer(source, dest ChainId, nonce Nonce, resourceId ResourceId, tokenId *big.Int, recipient, metadata []byte) Message {
 	return Message{
 		Source:       source,
